@@ -87,7 +87,11 @@ async def eliminate_subtraction(
     """
 
     if len(subtractions) == 0:
-        return
+        await asyncio.to_thread(
+            shutil.copyfile,
+            work_path / "unmapped_otus.fq",
+            work_path / "unmapped_subtraction.fq",
+        )
 
     await asyncio.to_thread(
         shutil.copyfile, work_path / "unmapped_otus.fq", work_path / "working_otus.fq"
